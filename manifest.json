@@ -1,0 +1,27 @@
+{
+    "name": "Scherzo",
+    "version": "1.0",
+    "description": "Scherzo Description",
+    "permissions": ["tabs", "declarativeContent", "storage"],
+    "background": {
+      "scripts": ["bin/js/background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+          "16": "img/icon16.png",
+          "32": "img/icon32.png",
+          "48": "img/icon48.png",
+          "128": "img/icon128.png"
+        }
+    },
+    "icons": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
+    },
+    "options_page": "options.html",
+    "manifest_version": 2
+  }
