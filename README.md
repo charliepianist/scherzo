@@ -11,3 +11,8 @@ To run the extension, go to Extensions and enable developer mode, then click on 
 
 ### Todos
 - Set up a testing environment! Probably using Closure + JSUnit.
+
+### Files not on Github
+- bin/ - compiled and minified JS files
+- docs/ - Planning and other documentation files
+- src/js/crypto/ - Various functions and wrappers of crypto libraries
