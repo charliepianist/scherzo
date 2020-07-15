@@ -4,6 +4,9 @@ cd "${0%/*}" > /dev/null 2>&1
 cd ..
 
 # Popup.js
+ECHO "======================================================================"
+ECHO "NOTE: Ignore any warnings about 'scherzo.util.compiler_satisfier' being an extra require."
+ECHO "======================================================================"
 ECHO "Compiling popup.js..."
 ECHO "======================================================================"
 java -jar dev-util/closure-compiler-v20200614.jar \
@@ -16,6 +19,12 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     \
     --warning_level=VERBOSE \
     --jscomp_off=nonStandardJsDocs \
+    --jscomp_warning=extraRequire \
+    --jscomp_warning=missingRequire \
+    --jscomp_warning=missingProvide \
+    --jscomp_warning=missingReturn \
+    --jscomp_warning=unusedLocalVariables \
+    --jscomp_warning=unusedPrivateMembers \
     --hide_warnings_for src/js/lib/*.js 
 # Background.js
 ECHO ""
@@ -31,6 +40,12 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     \
     --warning_level=VERBOSE \
     --jscomp_off=nonStandardJsDocs \
+    --jscomp_warning=extraRequire \
+    --jscomp_warning=missingRequire \
+    --jscomp_warning=missingProvide \
+    --jscomp_warning=missingReturn \
+    --jscomp_warning=unusedLocalVariables \
+    --jscomp_warning=unusedPrivateMembers \
     --hide_warnings_for src/js/lib/*.js 
 # Options.js
 ECHO ""
@@ -46,6 +61,12 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     \
     --warning_level=VERBOSE \
     --jscomp_off=nonStandardJsDocs \
+    --jscomp_warning=extraRequire \
+    --jscomp_warning=missingRequire \
+    --jscomp_warning=missingProvide \
+    --jscomp_warning=missingReturn \
+    --jscomp_warning=unusedLocalVariables \
+    --jscomp_warning=unusedPrivateMembers \
     --hide_warnings_for src/js/lib/*.js
 
 # Indicator of completion

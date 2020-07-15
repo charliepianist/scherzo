@@ -15,19 +15,8 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     document.getElementById('results').innerHTML += "<br>" + tab.url || tab.pendingUrl;  
 })
 
-// function dec2bin(dec){
-//     return (dec >>> 0).toString(2);
-// }
-
-// let hash = sjcl.hash.sha256.hash('test');
-// let bin = hash.map(int => dec2bin(int));
-// let hexa = bin.map(temp => parseInt(temp, 2).toString(16));
-// let result = hexa.join('');
-
-// document.getElementById('results').innerHTML += result;
-// console.log(result);
-
 scherzo.crypto.test();
+console.log(scherzo.crypto.hash('test'));
 
 changeColor.onclick = function(element) {
     let color = element.target.value;
