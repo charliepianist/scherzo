@@ -16,3 +16,8 @@ To run the extension, go to Extensions and enable developer mode, then click on 
 - bin/ - compiled and minified JS files
 - docs/ - Planning and other documentation files
 - src/js/crypto/ - Various functions and wrappers of crypto libraries
+- src/js/closure-library/ - Google's Closure Library (see [here](https://developers.google.com/closure/library/docs/gettingstarted) for how to download)
+
+### Modifications to Libraries
+- [sjcl.js](src/js/lib/sjcl.js) - Lines 1-8 are just compiler annotations and goog.provide
+- [elliptic.js](src/js/lib/elliptic.js) - Lines 1-5 are just compiler annotations and goog.provide, line 24 is to properly export elliptic.ec for use in other files.

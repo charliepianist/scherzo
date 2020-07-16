@@ -1,6 +1,6 @@
-goog.provide('scherzo.background');
+let goog; // Satisfy the compiler
 
-goog.require('scherzo.util.compiler_satisfier');
+goog.provide('scherzo.background');
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
