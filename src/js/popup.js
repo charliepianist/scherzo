@@ -1,6 +1,6 @@
-goog.provide('scherzo.popup');
+goog.module('scherzo.popup');
 
-goog.require('scherzo.crypto');
+const CRYPTO = goog.require('scherzo.crypto');
 
 let changeColor = document.getElementById('changeColor');
 
@@ -14,8 +14,8 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     document.getElementById('results').innerHTML += "<br>" + tab.url || tab.pendingUrl;  
 })
 
-scherzo.crypto.test();
-console.log(scherzo.crypto.hash.hash('test'));
+CRYPTO.test();
+console.log(CRYPTO.HASH('test'));
 
 changeColor.onclick = function(element) {
     let color = element.target.value;

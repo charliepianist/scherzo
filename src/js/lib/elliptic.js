@@ -2,13 +2,16 @@
  * @fileoverview
  * @suppress {checkVars}
  */
-goog.provide('elliptic');
+goog.module('elliptic');
 
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.elliptic = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+var exportsLocal = {};
+var actualExports = {};
+
+(function(f){if(typeof exportsLocal==="object"&&typeof module!=="undefined"){module.exportsLocal=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.elliptic = f()}})(function(){var define,module,exportsLocal;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exportsLocal:{}};e[i][0].call(p.exportsLocal,function(r){var n=e[i][1][r];return o(n||r)},p,p.exportsLocal,r,e,n,t)}return n[i].exportsLocal}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exportsLocal){
     
     'use strict';
     
-    var elliptic = exports;
+    var elliptic = exportsLocal;
     
     elliptic.version = require('../package.json').version;
     elliptic.utils = require('./elliptic/utils');
@@ -20,10 +23,15 @@ goog.provide('elliptic');
     elliptic.ec = require('./elliptic/ec');
     elliptic.eddsa = require('./elliptic/eddsa');
 
-    // Needed to avoid renaming/be usable in other files
-    goog.exportSymbol('elliptic.ec', elliptic.ec);
+    actualExports.version = elliptic.version;
+    actualExports.utils = elliptic.utils;
+    actualExports.rand = elliptic.rand;
+    actualExports.curve = elliptic.curve;
+    actualExports.curves = elliptic.curves;
+    actualExports.ec = elliptic.ec;
+    actualExports.eddsa = elliptic.eddsa
     
-    },{"../package.json":35,"./elliptic/curve":4,"./elliptic/curves":7,"./elliptic/ec":8,"./elliptic/eddsa":11,"./elliptic/utils":15,"brorand":17}],2:[function(require,module,exports){
+    },{"../package.json":35,"./elliptic/curve":4,"./elliptic/curves":7,"./elliptic/ec":8,"./elliptic/eddsa":11,"./elliptic/utils":15,"brorand":17}],2:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -65,7 +73,7 @@ goog.provide('elliptic');
         this.redN = this.n.toRed(this.red);
       }
     }
-    module.exports = BaseCurve;
+    module.exportsLocal = BaseCurve;
     
     BaseCurve.prototype.point = function point() {
       throw new Error('Not implemented');
@@ -401,7 +409,7 @@ goog.provide('elliptic');
       return r;
     };
     
-    },{"../utils":15,"bn.js":16}],3:[function(require,module,exports){
+    },{"../utils":15,"bn.js":16}],3:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -430,7 +438,7 @@ goog.provide('elliptic');
       this.oneC = (conf.c | 0) === 1;
     }
     inherits(EdwardsCurve, Base);
-    module.exports = EdwardsCurve;
+    module.exportsLocal = EdwardsCurve;
     
     EdwardsCurve.prototype._mulA = function _mulA(num) {
       if (this.mOneA)
@@ -835,17 +843,17 @@ goog.provide('elliptic');
     Point.prototype.toP = Point.prototype.normalize;
     Point.prototype.mixedAdd = Point.prototype.add;
     
-    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],4:[function(require,module,exports){
+    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],4:[function(require,module,exportsLocal){
     'use strict';
     
-    var curve = exports;
+    var curve = exportsLocal;
     
     curve.base = require('./base');
     curve.short = require('./short');
     curve.mont = require('./mont');
     curve.edwards = require('./edwards');
     
-    },{"./base":2,"./edwards":3,"./mont":5,"./short":6}],5:[function(require,module,exports){
+    },{"./base":2,"./edwards":3,"./mont":5,"./short":6}],5:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -864,7 +872,7 @@ goog.provide('elliptic');
       this.a24 = this.i4.redMul(this.a.redAdd(this.two));
     }
     inherits(MontCurve, Base);
-    module.exports = MontCurve;
+    module.exportsLocal = MontCurve;
     
     MontCurve.prototype.validate = function validate(point) {
       var x = point.normalize().x;
@@ -1025,7 +1033,7 @@ goog.provide('elliptic');
       return this.x.fromRed();
     };
     
-    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],6:[function(require,module,exports){
+    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],6:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -1051,7 +1059,7 @@ goog.provide('elliptic');
       this._endoWnafT2 = new Array(4);
     }
     inherits(ShortCurve, Base);
-    module.exports = ShortCurve;
+    module.exportsLocal = ShortCurve;
     
     ShortCurve.prototype._getEndomorphism = function _getEndomorphism(conf) {
       // No efficient endomorphism
@@ -1964,10 +1972,10 @@ goog.provide('elliptic');
       return this.z.cmpn(0) === 0;
     };
     
-    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],7:[function(require,module,exports){
+    },{"../utils":15,"./base":2,"bn.js":16,"inherits":32}],7:[function(require,module,exportsLocal){
     'use strict';
     
-    var curves = exports;
+    var curves = exportsLocal;
     
     var hash = require('hash.js');
     var curve = require('./curve');
@@ -2172,7 +2180,7 @@ goog.provide('elliptic');
       ]
     });
     
-    },{"./curve":4,"./precomputed/secp256k1":14,"./utils":15,"hash.js":19}],8:[function(require,module,exports){
+    },{"./curve":4,"./precomputed/secp256k1":14,"./utils":15,"hash.js":19}],8:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -2217,7 +2225,7 @@ goog.provide('elliptic');
       // Hash for function for DRBG
       this.hash = options.hash || options.curve.hash;
     }
-    module.exports = EC;
+    module.exportsLocal = EC;
     
     EC.prototype.keyPair = function keyPair(options) {
       return new KeyPair(this, options);
@@ -2420,7 +2428,7 @@ goog.provide('elliptic');
       throw new Error('Unable to find valid recovery factor');
     };
     
-    },{"../curves":7,"../utils":15,"./key":9,"./signature":10,"bn.js":16,"brorand":17,"hmac-drbg":31}],9:[function(require,module,exports){
+    },{"../curves":7,"../utils":15,"./key":9,"./signature":10,"bn.js":16,"brorand":17,"hmac-drbg":31}],9:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -2438,7 +2446,7 @@ goog.provide('elliptic');
       if (options.pub)
         this._importPublic(options.pub, options.pubEnc);
     }
-    module.exports = KeyPair;
+    module.exportsLocal = KeyPair;
     
     KeyPair.fromPublic = function fromPublic(ec, pub, enc) {
       if (pub instanceof KeyPair)
@@ -2540,7 +2548,7 @@ goog.provide('elliptic');
              ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
     };
     
-    },{"../utils":15,"bn.js":16}],10:[function(require,module,exports){
+    },{"../utils":15,"bn.js":16}],10:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -2563,7 +2571,7 @@ goog.provide('elliptic');
       else
         this.recoveryParam = options.recoveryParam;
     }
-    module.exports = Signature;
+    module.exportsLocal = Signature;
     
     function Position() {
       this.place = 0;
@@ -2708,7 +2716,7 @@ goog.provide('elliptic');
       return utils.encode(res, enc);
     };
     
-    },{"../utils":15,"bn.js":16}],11:[function(require,module,exports){
+    },{"../utils":15,"bn.js":16}],11:[function(require,module,exportsLocal){
     'use strict';
     
     var hash = require('hash.js');
@@ -2735,7 +2743,7 @@ goog.provide('elliptic');
       this.hash = hash.sha512;
     }
     
-    module.exports = EDDSA;
+    module.exportsLocal = EDDSA;
     
     /**
     * @param {Array|String} message - message bytes
@@ -2828,7 +2836,7 @@ goog.provide('elliptic');
       return val instanceof this.pointClass;
     };
     
-    },{"../curves":7,"../utils":15,"./key":12,"./signature":13,"hash.js":19}],12:[function(require,module,exports){
+    },{"../curves":7,"../utils":15,"./key":12,"./signature":13,"hash.js":19}],12:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -2923,9 +2931,9 @@ goog.provide('elliptic');
       return utils.encode(this.pubBytes(), enc);
     };
     
-    module.exports = KeyPair;
+    module.exportsLocal = KeyPair;
     
-    },{"../utils":15}],13:[function(require,module,exports){
+    },{"../utils":15}],13:[function(require,module,exportsLocal){
     'use strict';
     
     var BN = require('bn.js');
@@ -2990,10 +2998,10 @@ goog.provide('elliptic');
       return utils.encode(this.toBytes(), 'hex').toUpperCase();
     };
     
-    module.exports = Signature;
+    module.exportsLocal = Signature;
     
-    },{"../utils":15,"bn.js":16}],14:[function(require,module,exports){
-    module.exports = {
+    },{"../utils":15,"bn.js":16}],14:[function(require,module,exportsLocal){
+    module.exportsLocal = {
       doubles: {
         step: 4,
         points: [
@@ -3774,10 +3782,10 @@ goog.provide('elliptic');
       }
     };
     
-    },{}],15:[function(require,module,exports){
+    },{}],15:[function(require,module,exportsLocal){
     'use strict';
     
-    var utils = exports;
+    var utils = exportsLocal;
     var BN = require('bn.js');
     var minAssert = require('minimalistic-assert');
     var minUtils = require('minimalistic-crypto-utils');
@@ -3895,8 +3903,8 @@ goog.provide('elliptic');
     utils.intFromLE = intFromLE;
     
     
-    },{"bn.js":16,"minimalistic-assert":33,"minimalistic-crypto-utils":34}],16:[function(require,module,exports){
-    (function (module, exports) {
+    },{"bn.js":16,"minimalistic-assert":33,"minimalistic-crypto-utils":34}],16:[function(require,module,exportsLocal){
+    (function (module, exportsLocal) {
       'use strict';
     
       // Utils
@@ -3938,9 +3946,9 @@ goog.provide('elliptic');
         }
       }
       if (typeof module === 'object') {
-        module.exports = BN;
+        module.exportsLocal = BN;
       } else {
-        exports.BN = BN;
+        exportsLocal.BN = BN;
       }
     
       BN.BN = BN;
@@ -7321,10 +7329,10 @@ goog.provide('elliptic');
       };
     })(typeof module === 'undefined' || module, this);
     
-    },{"buffer":18}],17:[function(require,module,exports){
+    },{"buffer":18}],17:[function(require,module,exportsLocal){
     var r;
     
-    module.exports = function rand(len) {
+    module.exportsLocal = function rand(len) {
       if (!r)
         r = new Rand(null);
     
@@ -7334,7 +7342,7 @@ goog.provide('elliptic');
     function Rand(rand) {
       this.rand = rand;
     }
-    module.exports.Rand = Rand;
+    module.exportsLocal.Rand = Rand;
     
     Rand.prototype.generate = function generate(len) {
       return this._rand(len);
@@ -7388,10 +7396,10 @@ goog.provide('elliptic');
       }
     }
     
-    },{"crypto":18}],18:[function(require,module,exports){
+    },{"crypto":18}],18:[function(require,module,exportsLocal){
     
-    },{}],19:[function(require,module,exports){
-    var hash = exports;
+    },{}],19:[function(require,module,exportsLocal){
+    var hash = exportsLocal;
     
     hash.utils = require('./hash/utils');
     hash.common = require('./hash/common');
@@ -7407,7 +7415,7 @@ goog.provide('elliptic');
     hash.sha512 = hash.sha.sha512;
     hash.ripemd160 = hash.ripemd.ripemd160;
     
-    },{"./hash/common":20,"./hash/hmac":21,"./hash/ripemd":22,"./hash/sha":23,"./hash/utils":30}],20:[function(require,module,exports){
+    },{"./hash/common":20,"./hash/hmac":21,"./hash/ripemd":22,"./hash/sha":23,"./hash/utils":30}],20:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('./utils');
@@ -7425,7 +7433,7 @@ goog.provide('elliptic');
       this._delta8 = this.blockSize / 8;
       this._delta32 = this.blockSize / 32;
     }
-    exports.BlockHash = BlockHash;
+    exportsLocal.BlockHash = BlockHash;
     
     BlockHash.prototype.update = function update(msg, enc) {
       // Convert message to array, pad it, and join into 32bit blocks
@@ -7501,7 +7509,7 @@ goog.provide('elliptic');
       return res;
     };
     
-    },{"./utils":30,"minimalistic-assert":33}],21:[function(require,module,exports){
+    },{"./utils":30,"minimalistic-assert":33}],21:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('./utils');
@@ -7518,7 +7526,7 @@ goog.provide('elliptic');
     
       this._init(utils.toArray(key, enc));
     }
-    module.exports = Hmac;
+    module.exportsLocal = Hmac;
     
     Hmac.prototype._init = function init(key) {
       // Shorten key, if needed
@@ -7550,7 +7558,7 @@ goog.provide('elliptic');
       return this.outer.digest(enc);
     };
     
-    },{"./utils":30,"minimalistic-assert":33}],22:[function(require,module,exports){
+    },{"./utils":30,"minimalistic-assert":33}],22:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('./utils');
@@ -7572,7 +7580,7 @@ goog.provide('elliptic');
       this.endian = 'little';
     }
     utils.inherits(RIPEMD160, BlockHash);
-    exports.ripemd160 = RIPEMD160;
+    exportsLocal.ripemd160 = RIPEMD160;
     
     RIPEMD160.blockSize = 512;
     RIPEMD160.outSize = 160;
@@ -7698,16 +7706,16 @@ goog.provide('elliptic');
       8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
     ];
     
-    },{"./common":20,"./utils":30}],23:[function(require,module,exports){
+    },{"./common":20,"./utils":30}],23:[function(require,module,exportsLocal){
     'use strict';
     
-    exports.sha1 = require('./sha/1');
-    exports.sha224 = require('./sha/224');
-    exports.sha256 = require('./sha/256');
-    exports.sha384 = require('./sha/384');
-    exports.sha512 = require('./sha/512');
+    exportsLocal.sha1 = require('./sha/1');
+    exportsLocal.sha224 = require('./sha/224');
+    exportsLocal.sha256 = require('./sha/256');
+    exportsLocal.sha384 = require('./sha/384');
+    exportsLocal.sha512 = require('./sha/512');
     
-    },{"./sha/1":24,"./sha/224":25,"./sha/256":26,"./sha/384":27,"./sha/512":28}],24:[function(require,module,exports){
+    },{"./sha/1":24,"./sha/224":25,"./sha/256":26,"./sha/384":27,"./sha/512":28}],24:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -7737,7 +7745,7 @@ goog.provide('elliptic');
     }
     
     utils.inherits(SHA1, BlockHash);
-    module.exports = SHA1;
+    module.exportsLocal = SHA1;
     
     SHA1.blockSize = 512;
     SHA1.outSize = 160;
@@ -7783,7 +7791,7 @@ goog.provide('elliptic');
         return utils.split32(this.h, 'big');
     };
     
-    },{"../common":20,"../utils":30,"./common":29}],25:[function(require,module,exports){
+    },{"../common":20,"../utils":30,"./common":29}],25:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -7799,7 +7807,7 @@ goog.provide('elliptic');
         0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4 ];
     }
     utils.inherits(SHA224, SHA256);
-    module.exports = SHA224;
+    module.exportsLocal = SHA224;
     
     SHA224.blockSize = 512;
     SHA224.outSize = 224;
@@ -7815,7 +7823,7 @@ goog.provide('elliptic');
     };
     
     
-    },{"../utils":30,"./256":26}],26:[function(require,module,exports){
+    },{"../utils":30,"./256":26}],26:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -7867,7 +7875,7 @@ goog.provide('elliptic');
       this.W = new Array(64);
     }
     utils.inherits(SHA256, BlockHash);
-    module.exports = SHA256;
+    module.exportsLocal = SHA256;
     
     SHA256.blockSize = 512;
     SHA256.outSize = 256;
@@ -7922,7 +7930,7 @@ goog.provide('elliptic');
         return utils.split32(this.h, 'big');
     };
     
-    },{"../common":20,"../utils":30,"./common":29,"minimalistic-assert":33}],27:[function(require,module,exports){
+    },{"../common":20,"../utils":30,"./common":29,"minimalistic-assert":33}],27:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -7945,7 +7953,7 @@ goog.provide('elliptic');
         0x47b5481d, 0xbefa4fa4 ];
     }
     utils.inherits(SHA384, SHA512);
-    module.exports = SHA384;
+    module.exportsLocal = SHA384;
     
     SHA384.blockSize = 1024;
     SHA384.outSize = 384;
@@ -7959,7 +7967,7 @@ goog.provide('elliptic');
         return utils.split32(this.h.slice(0, 12), 'big');
     };
     
-    },{"../utils":30,"./512":28}],28:[function(require,module,exports){
+    },{"../utils":30,"./512":28}],28:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -8041,7 +8049,7 @@ goog.provide('elliptic');
       this.W = new Array(160);
     }
     utils.inherits(SHA512, BlockHash);
-    module.exports = SHA512;
+    module.exportsLocal = SHA512;
     
     SHA512.blockSize = 1024;
     SHA512.outSize = 512;
@@ -8291,7 +8299,7 @@ goog.provide('elliptic');
       return r;
     }
     
-    },{"../common":20,"../utils":30,"minimalistic-assert":33}],29:[function(require,module,exports){
+    },{"../common":20,"../utils":30,"minimalistic-assert":33}],29:[function(require,module,exportsLocal){
     'use strict';
     
     var utils = require('../utils');
@@ -8305,50 +8313,50 @@ goog.provide('elliptic');
       if (s === 2)
         return maj32(x, y, z);
     }
-    exports.ft_1 = ft_1;
+    exportsLocal.ft_1 = ft_1;
     
     function ch32(x, y, z) {
       return (x & y) ^ ((~x) & z);
     }
-    exports.ch32 = ch32;
+    exportsLocal.ch32 = ch32;
     
     function maj32(x, y, z) {
       return (x & y) ^ (x & z) ^ (y & z);
     }
-    exports.maj32 = maj32;
+    exportsLocal.maj32 = maj32;
     
     function p32(x, y, z) {
       return x ^ y ^ z;
     }
-    exports.p32 = p32;
+    exportsLocal.p32 = p32;
     
     function s0_256(x) {
       return rotr32(x, 2) ^ rotr32(x, 13) ^ rotr32(x, 22);
     }
-    exports.s0_256 = s0_256;
+    exportsLocal.s0_256 = s0_256;
     
     function s1_256(x) {
       return rotr32(x, 6) ^ rotr32(x, 11) ^ rotr32(x, 25);
     }
-    exports.s1_256 = s1_256;
+    exportsLocal.s1_256 = s1_256;
     
     function g0_256(x) {
       return rotr32(x, 7) ^ rotr32(x, 18) ^ (x >>> 3);
     }
-    exports.g0_256 = g0_256;
+    exportsLocal.g0_256 = g0_256;
     
     function g1_256(x) {
       return rotr32(x, 17) ^ rotr32(x, 19) ^ (x >>> 10);
     }
-    exports.g1_256 = g1_256;
+    exportsLocal.g1_256 = g1_256;
     
-    },{"../utils":30}],30:[function(require,module,exports){
+    },{"../utils":30}],30:[function(require,module,exportsLocal){
     'use strict';
     
     var assert = require('minimalistic-assert');
     var inherits = require('inherits');
     
-    exports.inherits = inherits;
+    exportsLocal.inherits = inherits;
     
     function isSurrogatePair(msg, i) {
       if ((msg.charCodeAt(i) & 0xFC00) !== 0xD800) {
@@ -8405,7 +8413,7 @@ goog.provide('elliptic');
       }
       return res;
     }
-    exports.toArray = toArray;
+    exportsLocal.toArray = toArray;
     
     function toHex(msg) {
       var res = '';
@@ -8413,7 +8421,7 @@ goog.provide('elliptic');
         res += zero2(msg[i].toString(16));
       return res;
     }
-    exports.toHex = toHex;
+    exportsLocal.toHex = toHex;
     
     function htonl(w) {
       var res = (w >>> 24) |
@@ -8422,7 +8430,7 @@ goog.provide('elliptic');
                 ((w & 0xff) << 24);
       return res >>> 0;
     }
-    exports.htonl = htonl;
+    exportsLocal.htonl = htonl;
     
     function toHex32(msg, endian) {
       var res = '';
@@ -8434,7 +8442,7 @@ goog.provide('elliptic');
       }
       return res;
     }
-    exports.toHex32 = toHex32;
+    exportsLocal.toHex32 = toHex32;
     
     function zero2(word) {
       if (word.length === 1)
@@ -8442,7 +8450,7 @@ goog.provide('elliptic');
       else
         return word;
     }
-    exports.zero2 = zero2;
+    exportsLocal.zero2 = zero2;
     
     function zero8(word) {
       if (word.length === 7)
@@ -8462,7 +8470,7 @@ goog.provide('elliptic');
       else
         return word;
     }
-    exports.zero8 = zero8;
+    exportsLocal.zero8 = zero8;
     
     function join32(msg, start, end, endian) {
       var len = end - start;
@@ -8478,7 +8486,7 @@ goog.provide('elliptic');
       }
       return res;
     }
-    exports.join32 = join32;
+    exportsLocal.join32 = join32;
     
     function split32(msg, endian) {
       var res = new Array(msg.length * 4);
@@ -8498,37 +8506,37 @@ goog.provide('elliptic');
       }
       return res;
     }
-    exports.split32 = split32;
+    exportsLocal.split32 = split32;
     
     function rotr32(w, b) {
       return (w >>> b) | (w << (32 - b));
     }
-    exports.rotr32 = rotr32;
+    exportsLocal.rotr32 = rotr32;
     
     function rotl32(w, b) {
       return (w << b) | (w >>> (32 - b));
     }
-    exports.rotl32 = rotl32;
+    exportsLocal.rotl32 = rotl32;
     
     function sum32(a, b) {
       return (a + b) >>> 0;
     }
-    exports.sum32 = sum32;
+    exportsLocal.sum32 = sum32;
     
     function sum32_3(a, b, c) {
       return (a + b + c) >>> 0;
     }
-    exports.sum32_3 = sum32_3;
+    exportsLocal.sum32_3 = sum32_3;
     
     function sum32_4(a, b, c, d) {
       return (a + b + c + d) >>> 0;
     }
-    exports.sum32_4 = sum32_4;
+    exportsLocal.sum32_4 = sum32_4;
     
     function sum32_5(a, b, c, d, e) {
       return (a + b + c + d + e) >>> 0;
     }
-    exports.sum32_5 = sum32_5;
+    exportsLocal.sum32_5 = sum32_5;
     
     function sum64(buf, pos, ah, al) {
       var bh = buf[pos];
@@ -8539,20 +8547,20 @@ goog.provide('elliptic');
       buf[pos] = hi >>> 0;
       buf[pos + 1] = lo;
     }
-    exports.sum64 = sum64;
+    exportsLocal.sum64 = sum64;
     
     function sum64_hi(ah, al, bh, bl) {
       var lo = (al + bl) >>> 0;
       var hi = (lo < al ? 1 : 0) + ah + bh;
       return hi >>> 0;
     }
-    exports.sum64_hi = sum64_hi;
+    exportsLocal.sum64_hi = sum64_hi;
     
     function sum64_lo(ah, al, bh, bl) {
       var lo = al + bl;
       return lo >>> 0;
     }
-    exports.sum64_lo = sum64_lo;
+    exportsLocal.sum64_lo = sum64_lo;
     
     function sum64_4_hi(ah, al, bh, bl, ch, cl, dh, dl) {
       var carry = 0;
@@ -8567,13 +8575,13 @@ goog.provide('elliptic');
       var hi = ah + bh + ch + dh + carry;
       return hi >>> 0;
     }
-    exports.sum64_4_hi = sum64_4_hi;
+    exportsLocal.sum64_4_hi = sum64_4_hi;
     
     function sum64_4_lo(ah, al, bh, bl, ch, cl, dh, dl) {
       var lo = al + bl + cl + dl;
       return lo >>> 0;
     }
-    exports.sum64_4_lo = sum64_4_lo;
+    exportsLocal.sum64_4_lo = sum64_4_lo;
     
     function sum64_5_hi(ah, al, bh, bl, ch, cl, dh, dl, eh, el) {
       var carry = 0;
@@ -8590,39 +8598,39 @@ goog.provide('elliptic');
       var hi = ah + bh + ch + dh + eh + carry;
       return hi >>> 0;
     }
-    exports.sum64_5_hi = sum64_5_hi;
+    exportsLocal.sum64_5_hi = sum64_5_hi;
     
     function sum64_5_lo(ah, al, bh, bl, ch, cl, dh, dl, eh, el) {
       var lo = al + bl + cl + dl + el;
     
       return lo >>> 0;
     }
-    exports.sum64_5_lo = sum64_5_lo;
+    exportsLocal.sum64_5_lo = sum64_5_lo;
     
     function rotr64_hi(ah, al, num) {
       var r = (al << (32 - num)) | (ah >>> num);
       return r >>> 0;
     }
-    exports.rotr64_hi = rotr64_hi;
+    exportsLocal.rotr64_hi = rotr64_hi;
     
     function rotr64_lo(ah, al, num) {
       var r = (ah << (32 - num)) | (al >>> num);
       return r >>> 0;
     }
-    exports.rotr64_lo = rotr64_lo;
+    exportsLocal.rotr64_lo = rotr64_lo;
     
     function shr64_hi(ah, al, num) {
       return ah >>> num;
     }
-    exports.shr64_hi = shr64_hi;
+    exportsLocal.shr64_hi = shr64_hi;
     
     function shr64_lo(ah, al, num) {
       var r = (ah << (32 - num)) | (al >>> num);
       return r >>> 0;
     }
-    exports.shr64_lo = shr64_lo;
+    exportsLocal.shr64_lo = shr64_lo;
     
-    },{"inherits":32,"minimalistic-assert":33}],31:[function(require,module,exports){
+    },{"inherits":32,"minimalistic-assert":33}],31:[function(require,module,exportsLocal){
     'use strict';
     
     var hash = require('hash.js');
@@ -8650,7 +8658,7 @@ goog.provide('elliptic');
              'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
       this._init(entropy, nonce, pers);
     }
-    module.exports = HmacDRBG;
+    module.exportsLocal = HmacDRBG;
     
     HmacDRBG.prototype._init = function init(entropy, nonce, pers) {
       var seed = entropy.concat(nonce).concat(pers);
@@ -8737,10 +8745,10 @@ goog.provide('elliptic');
       return utils.encode(res, enc);
     };
     
-    },{"hash.js":19,"minimalistic-assert":33,"minimalistic-crypto-utils":34}],32:[function(require,module,exports){
+    },{"hash.js":19,"minimalistic-assert":33,"minimalistic-crypto-utils":34}],32:[function(require,module,exportsLocal){
     if (typeof Object.create === 'function') {
       // implementation from standard node.js 'util' module
-      module.exports = function inherits(ctor, superCtor) {
+      module.exportsLocal = function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor
           ctor.prototype = Object.create(superCtor.prototype, {
@@ -8755,7 +8763,7 @@ goog.provide('elliptic');
       };
     } else {
       // old school shim for old browsers
-      module.exports = function inherits(ctor, superCtor) {
+      module.exportsLocal = function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor
           var TempCtor = function () {}
@@ -8766,8 +8774,8 @@ goog.provide('elliptic');
       }
     }
     
-    },{}],33:[function(require,module,exports){
-    module.exports = assert;
+    },{}],33:[function(require,module,exportsLocal){
+    module.exportsLocal = assert;
     
     function assert(val, msg) {
       if (!val)
@@ -8779,10 +8787,10 @@ goog.provide('elliptic');
         throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
     };
     
-    },{}],34:[function(require,module,exports){
+    },{}],34:[function(require,module,exportsLocal){
     'use strict';
     
-    var utils = exports;
+    var utils = exportsLocal;
     
     function toArray(msg, enc) {
       if (Array.isArray(msg))
@@ -8839,8 +8847,8 @@ goog.provide('elliptic');
         return arr;
     };
     
-    },{}],35:[function(require,module,exports){
-    module.exports={
+    },{}],35:[function(require,module,exportsLocal){
+    module.exportsLocal={
       "name": "elliptic",
       "version": "6.5.3",
       "description": "EC cryptography",
@@ -8901,3 +8909,5 @@ goog.provide('elliptic');
     
     },{}]},{},[1])(1)
     });
+    
+exports = actualExports;

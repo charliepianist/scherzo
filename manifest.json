@@ -2,7 +2,13 @@
     "name": "Scherzo",
     "version": "1.0",
     "description": "Scherzo Description",
-    "permissions": ["tabs", "declarativeContent", "storage"],
+    "permissions": [
+      "tabs", 
+      "declarativeContent", 
+      "storage",
+      "http://*/*",
+      "https://*/*"
+    ],
     "background": {
       "scripts": ["bin/js/background.js"],
       "persistent": false

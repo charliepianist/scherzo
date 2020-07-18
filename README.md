@@ -19,6 +19,6 @@ To run the extension, go to Extensions and enable developer mode, then click on 
 - src/js/closure-library/ - Google's Closure Library (see [here](https://developers.google.com/closure/library/docs/gettingstarted) for how to download)
 
 ### Modifications to Libraries
-- [sjcl.js](src/js/lib/sjcl.js) - Lines 1-8 are just compiler annotations and goog.provide
-- [elliptic.js](src/js/lib/elliptic.js) - Lines 1-5 are just compiler annotations and goog.provide, line 24 is to properly export elliptic.ec for use in other files.
+- [sjcl.js](src/js/lib/sjcl.js) - Lines 1-8 are just compiler annotations and goog.module, last line is defining exports
+- [elliptic.js](src/js/lib/elliptic.js) - Lines 1-5 are just compiler annotations and goog.module, all "exports" have been renamed to "exportsLocal" to avoid errors of assigning to exports in a different scope than module-level, and exports are assigned to "actualExports" object, in order to (at the end of the file) actually export the desired exports.
 - [calcdeps.py](src/js/closure-library/closure/bin/calcdeps.py) - Line 95 was replaced with ```return result``` due to not being able to concatenate a map with a list (the return value of `ExpandDirectories` was a map, which caused the problem).
