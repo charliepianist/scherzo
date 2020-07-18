@@ -21,3 +21,4 @@ To run the extension, go to Extensions and enable developer mode, then click on 
 ### Modifications to Libraries
 - [sjcl.js](src/js/lib/sjcl.js) - Lines 1-8 are just compiler annotations and goog.provide
 - [elliptic.js](src/js/lib/elliptic.js) - Lines 1-5 are just compiler annotations and goog.provide, line 24 is to properly export elliptic.ec for use in other files.
+- [calcdeps.py](src/js/closure-library/closure/bin/calcdeps.py) - Line 95 was replaced with ```return result``` due to not being able to concatenate a map with a list (the return value of `ExpandDirectories` was a map, which caused the problem).
