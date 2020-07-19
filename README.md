@@ -18,7 +18,6 @@ To test, run [dev-util/compile-test.sh](dev-util/compile-test.sh) to compile all
 ### Files not on Github
 - bin/ - compiled and minified JS files
 - docs/ - Planning and other documentation files
-- src/js/crypto/ - Various functions and wrappers of crypto libraries
 - src/js/closure-library/ - Google's Closure Library (see [here](https://developers.google.com/closure/library/docs/gettingstarted) for how to download)
 
 ### Modifications to Libraries
