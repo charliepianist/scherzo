@@ -1,6 +1,4 @@
-let goog; // Satisfy the compiler
-
-goog.provide('scherzo.options');
+goog.module('scherzo.options');
 
 let page = document.getElementById('buttonDiv');
   const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];

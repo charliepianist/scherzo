@@ -7,8 +7,7 @@ cd ..
 ECHO "Compiling popup.js..."
 ECHO "======================================================================"
 java -jar dev-util/closure-compiler-v20200614.jar \
-    --js src/js/*.js \
-    --js src/js/**/*.js \
+    --js src/ \
     --externs src/js/lib/*.js_externs \
     --dependency_mode=PRUNE \
     --entry_point=scherzo.popup \
@@ -16,23 +15,20 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     --js_output_file bin/js/popup.js \
     \
     --warning_level=VERBOSE \
-    --jscomp_off=nonStandardJsDocs \
     --jscomp_warning=extraRequire \
     --jscomp_warning=missingRequire \
     --jscomp_warning=missingProvide \
     --jscomp_warning=missingReturn \
     --jscomp_warning=unusedLocalVariables \
     --jscomp_warning=unusedPrivateMembers \
-    --hide_warnings_for src/js/lib/*.js \
-    --hide_warnings_for src/js/lib/**/*.js \
-    --hide_warnings_for src/js/lib/elliptic.js # For some reason, compiler started throwing warnings without this explicitly here
+    --hide_warnings_for src/js/lib/ \
+    --hide_warnings_for src/js/closure-library/
 # Background.js
 ECHO ""
 ECHO "Compiling background.js..."
 ECHO "======================================================================"
 java -jar dev-util/closure-compiler-v20200614.jar \
-    --js src/js/*.js \
-    --js src/js/**/*.js \
+    --js src/ \
     --externs src/js/lib/*.js_externs \
     --dependency_mode=PRUNE \
     --entry_point=scherzo.background \
@@ -40,22 +36,20 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     --js_output_file bin/js/background.js \
     \
     --warning_level=VERBOSE \
-    --jscomp_off=nonStandardJsDocs \
     --jscomp_warning=extraRequire \
     --jscomp_warning=missingRequire \
     --jscomp_warning=missingProvide \
     --jscomp_warning=missingReturn \
     --jscomp_warning=unusedLocalVariables \
     --jscomp_warning=unusedPrivateMembers \
-    --hide_warnings_for src/js/lib/*.js \
-    --hide_warnings_for src/js/lib/**/*.js 
+    --hide_warnings_for src/js/lib/ \
+    --hide_warnings_for src/js/closure-library/
 # Options.js
 ECHO ""
 ECHO "Compiling options.js..."
 ECHO "======================================================================"
 java -jar dev-util/closure-compiler-v20200614.jar \
-    --js src/js/*.js \
-    --js src/js/**/*.js \
+    --js src/ \
     --externs src/js/lib/*.js_externs \
     --dependency_mode=PRUNE \
     --entry_point=scherzo.options \
@@ -63,15 +57,14 @@ java -jar dev-util/closure-compiler-v20200614.jar \
     --js_output_file bin/js/options.js \
     \
     --warning_level=VERBOSE \
-    --jscomp_off=nonStandardJsDocs \
     --jscomp_warning=extraRequire \
     --jscomp_warning=missingRequire \
     --jscomp_warning=missingProvide \
     --jscomp_warning=missingReturn \
     --jscomp_warning=unusedLocalVariables \
     --jscomp_warning=unusedPrivateMembers \
-    --hide_warnings_for src/js/lib/*.js \
-    --hide_warnings_for src/js/lib/**/*.js 
+    --hide_warnings_for src/js/lib/ \
+    --hide_warnings_for src/js/closure-library/
 
 # Indicator of completion
 ECHO ""
