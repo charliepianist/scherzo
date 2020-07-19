@@ -15,15 +15,3 @@ exports.AUTH = AUTH;
 exports.CORE = CORE;
 exports.HASH = HASH;
 exports.PKC = PKC;
-
-exports.test = function() {
-    let alice = new PKC.KeyPair();
-    let bob = new PKC.KeyPair();
-
-    let bobSent = bob.toPublicString();
-    let aliceReceived = PKC.KeyPair.fromPublicString(bobSent);
-    console.log(bobSent);
-    console.log(alice.toPublicString());
-    console.log(alice.derive(aliceReceived).toString(16));
-    console.log(bob.derive(PKC.KeyPair.fromPublicString(alice.toPublicString())).toString(16));
-}

@@ -3,7 +3,7 @@ goog.setTestOnly();
 
 goog.require('goog.testing.asserts');
 const testSuite = goog.require('goog.testing.testSuite');
-const hash = goog.require('scherzo.crypto.hash');
+const HASH = goog.require('scherzo.crypto.hash');
 
 let TEST_MAP = {
     'test_string1': '291ac4664cc84d2546fff3b17aaaf709c4f147d10da697e3263a56db9030f423',
@@ -15,7 +15,7 @@ let TEST_MAP = {
 testSuite({
     testHash_OutputsCorrectSHA256Hashes() {
         for(let key of Object.keys(TEST_MAP)) {
-            assertEquals(TEST_MAP[key], hash(key));
+            assertEquals(TEST_MAP[key], HASH(key));
         }
     }
 });

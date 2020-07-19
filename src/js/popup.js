@@ -14,7 +14,6 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     document.getElementById('results').innerHTML += "<br>" + tab.url || tab.pendingUrl;  
 })
 
-CRYPTO.test();
 console.log(CRYPTO.HASH('test'));
 
 changeColor.onclick = function(element) {

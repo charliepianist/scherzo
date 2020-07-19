@@ -3,12 +3,12 @@ goog.setTestOnly();
 
 goog.require('goog.testing.asserts');
 const testSuite = goog.require('goog.testing.testSuite');
-const pkc = goog.require('scherzo.crypto.pkc');
+const PKC = goog.require('scherzo.crypto.pkc');
 
 testSuite({
     testPkc_Exchange_derivesSameNonEmptySharedKey_withValidInput() {
-        let exchange1 = new pkc.Exchange();
-        let exchange2 = new pkc.Exchange();
+        let exchange1 = new PKC.Exchange();
+        let exchange2 = new PKC.Exchange();
 
         let public1 = exchange1.sendOutput();
         let public2 = exchange2.sendOutput();
@@ -28,7 +28,7 @@ testSuite({
     testPkc_Exchange_derivesEmptySharedKey_andDoesNotThrowException_withInvalidJson() {
         let invalidPublics = ['13"9e}ry8f{kj:b'];
         for(let invalidPublic of invalidPublics) {
-            let exchange = new pkc.Exchange();
+            let exchange = new PKC.Exchange();
             exchange.receiveInput(invalidPublic);
             let shared = exchange.getSharedKey();
 
@@ -46,7 +46,7 @@ testSuite({
         ];
 
         for(let invalidPublic of invalidPublics) {
-            let exchange = new pkc.Exchange();
+            let exchange = new PKC.Exchange();
             exchange.receiveInput(invalidPublic);
             let shared = exchange.getSharedKey();
 
@@ -56,7 +56,7 @@ testSuite({
     },
 
     testPkc_Exchange_hasEmptySharedKey_beforeGivenInput() {
-        let exchange = new pkc.Exchange();
+        let exchange = new PKC.Exchange();
         let shared = exchange.getSharedKey();
         assertEquals('An Exchange object that hasn\'t been given a public key should return empty shared key.', 
             '', shared);
