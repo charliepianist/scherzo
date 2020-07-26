@@ -1,6 +1,6 @@
 ## Scherzo
 
-A chrome privacy extension. Currently the files are pretty much entirely filler, but the general structure should not change too much in the future.
+A chrome privacy extension. Encrypts messages before sending, then decrypts after receiving.
 
 ### Compiling and Running
 #### Compiling
